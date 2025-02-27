@@ -3,7 +3,7 @@ from airflow.models.dag import DAG
 from common.common_func import regist2
 from airflow.operators.bash import BashOperator
 with DAG(
-    dag_id="dags_bash_with_macro_eg1",
+    dag_id="dags_bash_with_macro_eg2",
     schedule="10 0 L * *",
     start_date=pendulum.datetime(2025, 1, 1, tz="Asia/Seoul"),
     catchup=False,
