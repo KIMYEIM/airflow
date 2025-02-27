@@ -1,0 +1,24 @@
+import pendulum
+from airflow.models.dag import DAG
+from common.common_func import regist2
+from airflow.operators.bash import BashOperator
+with DAG(
+    dag_id="dags_bash_with_macro_eg1",
+    schedule="10 0 L * *",
+    start_date=pendulum.datetime(2025, 1, 1, tz="Asia/Seoul"),
+    catchup=False,
+    tags=["lesson"],
+) as dag:
+  # START_DATE: 2주 전 월요일, END_DATE: 2주 전 토요일
+  bash_t2 = BashOperator(
+    task_id="bash_t2",
+    env = {
+      'START_DATE': '{{ (data_interval_end.in_timezone("Asia/Seoul") - macros.dateutil.relativedelta.relativedelta(days=19)) | ds }}',
+      'END_DATE': '{{ (data_interval_end.in_timezone("Asia/Seoul") - macros.dateutil.relativedelta.relativedelta(days=14))| ds }}',
+    },
+    bash_command='echo "START_DATE: $START_DATE" && echo "END_DATE: $END_DATE"'
+  )
+
+  bash_t2
+   
+
