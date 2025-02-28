@@ -18,6 +18,7 @@ with DAG(
     endpoint="{{var.value.apikey_openapi_seoul_go_kr}}/json/tbCycleStationInfo/1/5/",
     method="GET",
     headers={"Content-Type": "application/json", 'charset': 'utf-8', 'Accept': '*/*'},
+    scheme="http"
   )
 
   @task(task_id="python_2")
