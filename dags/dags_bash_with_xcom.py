@@ -12,9 +12,9 @@ with DAG(
   
   bash_push = BashOperator(
     task_id="bash_push",
-    bash_command="echo START &&"
-    "echo XCOM_PUSHED &&"
-    "{{ ti.xcom_push(key='bash_pushed', value='first_bash_message')}} &&"
+    bash_command="echo START && "
+    "echo XCOM_PUSHED && "
+    "{{ ti.xcom_push(key='bash_pushed', value='first_bash_message') }} ; "  # Changed && to ;
     "echo COMPLETE",
     do_xcom_push=True
   )
